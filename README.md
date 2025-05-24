@@ -40,6 +40,7 @@ alembic upgrade head
 python src/yadro_impulse_randomusers/main/web.py
 ```
 можно заходить на http://localhost:8000/homepage
+
 ---
 
 ## 🚀 Стек технологий
@@ -49,7 +50,7 @@ python src/yadro_impulse_randomusers/main/web.py
 - **SQLAlchemy 2.0 ORM** — работа с БД
 - **PostgreSQL** — база данных
 - **Alembic** — миграции
-- **httpx + pytest** — тестирование
+- **pytest** — тестирование
 - **unittest.mock** — моки зависимостей
 
 ## 🧠 Обоснование выбора технологий
