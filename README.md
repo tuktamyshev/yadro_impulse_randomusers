@@ -15,15 +15,16 @@
 ```bash
 make app # в корневой папке проекта
 ```
-В ide
+Локальный запуск
 ```bash
 uv sync
+source .venv/bin/activate
 
-# Создание базы данных и миграций
+# запушил env файлы чтобы было проще запустить
+# запустить postgresql, сделать БД с название yadro_impulse_randomusers (или переименовать в env/.env)
 alembic upgrade head
 
-# Запуск приложения
-python -m app.main
+python src/yadro_impulse_randomusers/main/web.py
 ```
 ---
 

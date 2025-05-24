@@ -1,8 +1,12 @@
+import sys
 from contextlib import AbstractAsyncContextManager, asynccontextmanager
+from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
+
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from adapters.user_service import UserService
 from config.config import Config
