@@ -52,7 +52,18 @@
         <a href="/homepage/random" class="random-btn" title="Показать случайного пользователя">🎲 Случайный пользователь</a>
     </div>
 
-    <hr>
+    <!-- Выбор количества пользователей на страницу -->
+    <form method="get" action="/homepage">
+        <label for="limit">Пользователей на страницу:</label>
+        <select name="limit" id="limit" onchange="this.form.submit()">
+            <option value="10" {% if limit == 10 %}selected{% endif %}>10</option>
+            <option value="50" {% if limit == 50 %}selected{% endif %}>50</option>
+            <option value="100" {% if limit == 100 %}selected{% endif %}>100</option>
+        </select>
+        <input type="hidden" name="offset" value="0">
+    </form>
+
+    <p>Всего пользователей: {{ total }} — всего страниц: {{ (total // limit) + (1 if total % limit else 0) }}</p>
 
     <!-- Пагинация сверху -->
     <nav class="pagination">

@@ -82,5 +82,6 @@ async def homepage_user_detail(
 async def fetch_users(
     user_service: FromDishka[UserService],
     count: int = Query(10, gt=0, le=100),
-) -> None:
+) -> RedirectResponse:
     await user_service.fetch_users(count)
+    return RedirectResponse(url="/homepage", status_code=303)
