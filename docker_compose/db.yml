@@ -1,0 +1,21 @@
+services:
+  yadro-impulse-randomusers-db:
+    container_name: yadro-impulse-randomusers-db
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: $DB__PASSWORD
+      POSTGRES_USER: $DB__USER
+      POSTGRES_DB: $DB__NAME
+    volumes:
+      - yadro_impulse_randomusers_db_data:/var/lib/postgresql/data/
+
+    networks:
+      - yadro-impulse-randomusers
+
+networks:
+  yadro-impulse-randomusers:
+    driver: bridge
+
+volumes:
+  yadro_impulse_randomusers_db_data:

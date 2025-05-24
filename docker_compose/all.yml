@@ -1,0 +1,28 @@
+services:
+  yadro-impulse-randomusers-app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: yadro-impulse-randomusers-app
+    ports:
+      - ${APP__API_PORT}:8000
+    env_file:
+      - ../env/.env.default
+      - ../env/.env.docker
+    volumes:
+      - ../src/:/app/src/
+      - yadro_impulse_randomusers_logs:/app/logs
+    depends_on:
+      yadro-impulse-randomusers-db:
+        condition: service_started
+
+    networks:
+      - yadro-impulse-randomusers
+
+networks:
+  yadro-impulse-randomusers:
+    driver: bridge
+
+volumes:
+  yadro_impulse_randomusers_logs:

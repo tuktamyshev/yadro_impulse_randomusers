@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Информация о пользователе</title>
+    <style>
+        img { width: 100px; border-radius: 50%; }
+        .container { max-width: 600px; margin: auto; font-family: Arial, sans-serif; }
+        .field { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Информация о пользователе</h1>
+        <img src="{{ user.photo_url }}" alt="avatar">
+        <div class="field"><strong>Имя:</strong> {{ user.first_name }}</div>
+        <div class="field"><strong>Фамилия:</strong> {{ user.last_name }}</div>
+        <div class="field"><strong>Email:</strong> {{ user.email }}</div>
+        <div class="field"><strong>Телефон:</strong> {{ user.phone_number }}</div>
+        <div class="field"><strong>Локация:</strong> {{ user.address }}</div>
+        <div class="field"><strong>Пол:</strong> {{ user.gender.value }}</div>
+
+        <a href="/homepage">← Назад к списку</a>
+    </div>
+</body>
+</html>

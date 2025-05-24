@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Пользователи</title>
+    <style>
+        img { width: 50px; border-radius: 50%; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+        a { text-decoration: none; color: blue; }
+        nav { margin-top: 20px; }
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            text-decoration: none;
+        }
+        .pagination a.active {
+            font-weight: bold;
+            background-color: #ddd;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .random-btn {
+            padding: 6px 12px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .random-btn:hover {
+            background-color: #357ae8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Пользователи</h1>
+
+    <div class="top-bar">
+        <form method="get" action="/fetch_users" style="margin: 0;">
+            <label>Сколько загрузить пользователей из API?</label>
+            <input type="number" name="count" min="1" max="100" value="10">
+            <button type="submit">Загрузить</button>
+        </form>
+
+        <a href="/homepage/random" class="random-btn" title="Показать случайного пользователя">🎲 Случайный пользователь</a>
+    </div>
+
+    <hr>
+
+    <!-- Пагинация сверху -->
+    <nav class="pagination">
+        {% if offset >= limit %}
+        <a href="/homepage?limit={{ limit }}&offset={{ offset - limit }}">← Назад</a>
+        {% endif %}
+        <a class="active">Страница {{ (offset // limit) + 1 }}</a>
+        {% if has_more %}
+        <a href="/homepage?limit={{ limit }}&offset={{ offset + limit }}">Вперёд →</a>
+        {% endif %}
+    </nav>
+
+    <table>
+        <tr>
+            <th>Фото</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Локация</th>
+            <th>Пол</th>
+            <th>Подробнее</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td><img src="{{ user.photo_url }}" alt="avatar"></td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.gender.value }}</td>
+            <td><a href="/homepage/{{ user.uuid }}">🔍</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Пагинация снизу -->
+    <nav class="pagination">
+        {% if offset >= limit %}
+        <a href="/homepage?limit={{ limit }}&offset={{ offset - limit }}">← Назад</a>
+        {% endif %}
+        <a class="active">Страница {{ (offset // limit) + 1 }}</a>
+        {% if has_more %}
+        <a href="/homepage?limit={{ limit }}&offset={{ offset + limit }}">Вперёд →</a>
+        {% endif %}
+    </nav>
+</body>
+</html>
